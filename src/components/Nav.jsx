@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import menu from "../assets/menu.svg";
-import { FaPenToSquare } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import pen from "../assets/pen.svg";
 
 const Nav = ({ open, setOpen }) => {
   return (
-    <nav className="relative px-4 py-2 flex items-center justify-between border-b-[#424242] border-b-solid border-b-[1px]">
+    <nav className="relative px-4 py-2 flex items-center justify-between border-b-[#424242] border-b-solid border-b-[1px] lg:hidden">
       <button onClick={() => setOpen(true)}>
         <img src={menu} alt="Menu Icon" className="w-[2rem]" />
       </button>
@@ -13,7 +13,7 @@ const Nav = ({ open, setOpen }) => {
         MightyGPT <span className="text-[#B4B4B4]">3.5</span>
       </span>
       <button>
-        <FaPenToSquare className="text-[1.3rem]" />
+        <img src={pen} alt="pen icon" className="w-[1.3rem]" />
       </button>
 
       {/* Close Button */}

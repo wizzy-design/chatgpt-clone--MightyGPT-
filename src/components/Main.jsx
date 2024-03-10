@@ -4,7 +4,7 @@ import { FaArrowUp } from "react-icons/fa";
 import Nav from "./Nav";
 import { useState } from "react";
 
-const Main = ({open, setOpen}) => {
+const Main = ({ open, setOpen }) => {
   const [inputValue, setInputValue] = useState("");
   const [rows, setRows] = useState(1); // Initial number of rows
 
@@ -20,10 +20,12 @@ const Main = ({open, setOpen}) => {
     <>
       <section className="relative w-full h-screen">
         {/* Nav Bar */}
-        <Nav open={open} setOpen={setOpen}/>
+        <Nav open={open} setOpen={setOpen} />
 
         {/* lg:Title */}
-        <header className="hidden lg:block">MightyGPT 3.5</header>
+        <header className="hidden text-lg font-semibold lg:block lg:p-5 lg:px-6">
+          MightyGPT <span className="text-[#B4B4B4]">3.5</span>
+        </header>
 
         {/* Hero Section */}
         <div className="pt-[14rem]">
