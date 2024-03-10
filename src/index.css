@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
