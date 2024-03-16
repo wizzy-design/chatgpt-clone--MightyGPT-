@@ -2,14 +2,22 @@
 import icon from "../assets/chatgpt.svg";
 import pen from "../assets/pen.svg";
 
-const Sidebar = ({ open }) => {
+const Sidebar = ({
+  open,
+  createNewChat,
+  uniqueTitle,
+  handleUniqueTitleClick,
+}) => {
   return (
     <section
       className={`${
         open ? "translate-x-0" : "translate-x-full hidden"
       } z-10 absolute flex-col items-center justify-between bg-[#171717] h-screen w-[70%] lg:static lg:block lg:z-0 lg:translate-x-0 lg:w-[20rem]`}
     >
-      <button className="flex m-2.5 py-2 px-1.5 rounded-xl w-[92%] justify-between items-center hover:bg-[#242424] focus:bg-[#242424]">
+      <button
+        className="flex m-2.5 py-2 px-1.5 rounded-xl w-[92%] justify-between items-center hover:bg-[#242424] focus:bg-[#242424]"
+        onClick={createNewChat}
+      >
         <span className="flex items-center text-sm font-semibold gap-x-2">
           <img
             src={icon}
@@ -24,8 +32,18 @@ const Sidebar = ({ open }) => {
       </button>
 
       {/* Chat history */}
-      <ul>
-        <li></li>
+      <ul className="h-[80vh] p-4 space-y-4">
+        {uniqueTitle?.map((uniquetitle, index) => (
+          <li
+            key={index}
+            onClick={() => handleUniqueTitleClick(uniquetitle)}
+            className={`px-2 cursor-pointer rounded-lg p-2 ${
+              uniquetitle ? "bg-[#2F2F2F]" : " "
+            }`}
+          >
+            {uniquetitle}
+          </li>
+        ))}
       </ul>
 
       {/* Footer bar */}

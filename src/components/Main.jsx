@@ -2,20 +2,17 @@
 import icon from "../assets/chatgpt.svg";
 import { FaArrowUp } from "react-icons/fa";
 import Nav from "./Nav";
-import { useState } from "react";
 
-const Main = ({ open, setOpen }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [rows, setRows] = useState(1); // Initial number of rows
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-
-    // Calculate the number of rows based on the content
-    const lines = e.target.value.split("\n").length;
-    setRows(lines <= 1 ? 1 : lines);
-  };
-
+const Main = ({
+  open,
+  setOpen,
+  getMessages,
+  inputValue,
+  handleInputChange,
+  rows,
+  currentTitle,
+  currentChat,
+}) => {
   return (
     <>
       <section className="relative w-full h-screen">
@@ -28,18 +25,34 @@ const Main = ({ open, setOpen }) => {
         </header>
 
         {/* Hero Section */}
-        <div className="pt-[14rem]">
-          <div className="flex justify-center mb-3">
-            <img
-              className="w-[3rem] p-2 bg-white rounded-full"
-              src={icon}
-              alt="ChatGPT icon"
-            />
+        {!currentTitle ? (
+          <div className="pt-[10rem] lg:pt-[8rem]">
+            <div className="flex justify-center mb-3">
+              <img
+                className="w-[3rem] p-2 bg-white rounded-full"
+                src={icon}
+                alt="ChatGPT icon"
+              />
+            </div>
+            <p className="mb-5 text-2xl font-medium text-center text-[#ECECEC]">
+              How can I help you today?
+            </p>
           </div>
-          <p className="mb-5 text-2xl font-medium text-center text-[#ECECEC]">
-            How can I help you today?
-          </p>
-        </div>
+        ) : (
+          ""
+        )}
+
+        {/* Chat feed */}
+        {currentChat && (
+          <ul className="w-full h-screen pt-3 pl-5 overflow-scroll lg:pl-16 lg:text-lg lg:w-[90%]">
+            {currentChat?.map((chatMessage, index) => (
+              <li key={index} className="flex w-full p-5">
+                <p className="capitalize role">{chatMessage.role}</p>
+                <p className="px-10 italic">{chatMessage.content}</p>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Bottom Section */}
         <div className="absolute bottom-0 flex flex-col items-center justify-center w-full px-3 pb-2">
@@ -52,17 +65,19 @@ const Main = ({ open, setOpen }) => {
               rows={rows}
               onChange={handleInputChange}
             />
-            <div
+            <button
+              type="submit"
+              onClick={getMessages}
               className={`absolute bottom-[12px] right-2 p-1.5 rounded-lg ${
-                inputValue.length > 0 ? "bg-white" : "bg-[#383838]"
+                inputValue?.length > 0 ? "bg-white" : "bg-[#383838]"
               }`}
             >
               <FaArrowUp
                 className={`${
-                  inputValue.length > 0 ? "fill-black" : "fill-[#1e1e1e]"
+                  inputValue?.length > 0 ? "fill-black" : "fill-[#1e1e1e]"
                 }`}
               />
-            </div>
+            </button>
           </div>
 
           {/* Footer note */}
